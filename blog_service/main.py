@@ -1,12 +1,9 @@
 from fastapi import FastAPI
-from blog_service.core.config import PROJECT_NAME, DEBUG, VERSION, ALLOWED_HOSTS, API_PREFIX
 from starlette.middleware.cors import CORSMiddleware
+
+from blog_service.core.config import PROJECT_NAME, DEBUG, VERSION, ALLOWED_HOSTS, API_PREFIX
 from blog_service.core.events import create_start_app_handler, create_stop_app_handler
 from blog_service.routers.router import router
-import logging
-from loguru import logger
-from blog_service.core.logging import InterceptHandler
-import sys
 
 
 def get_application() -> FastAPI:

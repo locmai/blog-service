@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from .endpoints.article import router as article_router
+from .article import router as article_router
 from loguru import logger
 router = APIRouter()
 

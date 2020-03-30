@@ -84,7 +84,7 @@ description = "FastAPI framework, high performance, easy to learn, fast to code,
 name = "fastapi"
 optional = false
 python-versions = ">=3.6"
-version = "0.53.0"
+version = "0.53.1"
 
 [package.dependencies]
 pydantic = ">=0.32.2,<2.0.0"
@@ -94,7 +94,7 @@ starlette = "0.13.2"
 all = ["requests", "aiofiles", "jinja2", "python-multipart", "itsdangerous", "pyyaml", "graphene", "ujson", "orjson", "email-validator", "uvicorn", "async-exit-stack", "async-generator"]
 dev = ["pyjwt", "passlib", "autoflake", "flake8", "uvicorn", "graphene"]
 doc = ["mkdocs", "mkdocs-material", "markdown-include", "typer", "typer-cli", "pyyaml"]
-test = ["pytest (>=4.0.0)", "pytest-cov", "mypy", "black", "isort", "requests", "email-validator", "sqlalchemy", "peewee", "databases", "orjson", "async-exit-stack", "async-generator", "python-multipart", "aiofiles", "ujson", "flask"]
+test = ["pytest (>=4.0.0)", "pytest-cov", "mypy", "black", "isort", "requests", "email-validator", "sqlalchemy", "peewee", "databases", "orjson", "async-exit-stack", "async-generator", "python-multipart", "aiofiles", "flask"]
 
 [[package]]
 category = "main"
@@ -436,7 +436,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "a9e9d926e6686ac9bd85247fda0d4c319abf3daf6dd5f7c57497a15fd57d3f1d"
+content-hash = "1bc59db3cdaa77c5290744cece83268e1640cc820b9894a12bf9e7380c5030b0"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -468,8 +468,8 @@ dnspython = [
     {file = "dnspython-1.16.0.zip", hash = "sha256:36c5e8e38d4369a08b6780b7f27d790a292b2b08eea01607865bf0936c558e01"},
 ]
 fastapi = [
-    {file = "fastapi-0.53.0-py3-none-any.whl", hash = "sha256:771f59ba7e3120b872d87089126c7971d2a8d62a47a5dd4a2122fbbf7f73581c"},
-    {file = "fastapi-0.53.0.tar.gz", hash = "sha256:2bf65ce6fab8dac001e3738570ee55aa68640ef28e7e0c0a55e2690ba86f97e7"},
+    {file = "fastapi-0.53.1-py3-none-any.whl", hash = "sha256:c478bc513d192f6776fd3f0355b7ff5414e94ed842677294c06e348105aaa237"},
+    {file = "fastapi-0.53.1.tar.gz", hash = "sha256:c2d572370153a6b74d62a73252d75934e2bfdbb0f620fecfd489b5d4789f5c48"},
 ]
 futures = [
     {file = "futures-3.1.1-py2-none-any.whl", hash = "sha256:c4884a65654a7c45435063e14ae85280eb1f111d94e542396717ba9828c4337f"},

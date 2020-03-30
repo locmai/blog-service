@@ -1,8 +1,7 @@
-# PErsonal
+# Personal
 .vscode
-.env
+tests
 
-dist
 *.pyc
 __pycache__
 # Packages

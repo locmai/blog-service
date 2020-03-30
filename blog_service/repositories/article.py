@@ -15,3 +15,6 @@ class ArticleRepository(BaseRepository):
 
     async def get_articles_by_filter(self, filter = {}):
         return await self.collection.find(filter).to_list(length=100)
+
+    async def find_one(self, filter):
+        return await self.collection.find(filter).to_list(length=1)

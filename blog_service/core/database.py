@@ -9,19 +9,12 @@ from blog_service.core.config import (DATABASE_URL, MAX_CONNECTIONS,
                                       MIN_CONNECTIONS)
 from blog_service.repositories.base import BaseRepository
 
+
 async def connect_to_db(app: FastAPI) -> None:
     logger.info("Connecting to {0}", repr(DATABASE_URL))
 
     app.state.client = AsyncIOMotorClient(
         DATABASE_URL, maxPoolSize=MAX_CONNECTIONS, minPoolSize=MIN_CONNECTIONS)
-    client = AsyncIOMotorClient(
-        DATABASE_URL, maxPoolSize=MAX_CONNECTIONS, minPoolSize=MIN_CONNECTIONS)
-
-    database = client.blog
-
-    something = await database["articles"].find({}).to_list(length=100)
-
-    logger.info("Connect DB: {0}", something)
 
     logger.info("Connection established")
 
