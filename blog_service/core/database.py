@@ -11,7 +11,7 @@ from blog_service.repositories.base import BaseRepository
 
 
 async def connect_to_db(app: FastAPI) -> None:
-    logger.info("Connecting to {0}", repr(DATABASE_URL))
+    logger.info("Connecting to MongoDB")
 
     app.state.client = AsyncIOMotorClient(
         DATABASE_URL, maxPoolSize=MAX_CONNECTIONS, minPoolSize=MIN_CONNECTIONS)

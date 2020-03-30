@@ -12,8 +12,9 @@ import json
 
 router = APIRouter()
 
-@router.get("/articles")
-async def get(article_svc: ArticleService = Depends(ArticleService)):
+
+@router.get('/')
+async def get_articles(article_svc: ArticleService = Depends(ArticleService)):
     articles = await article_svc.get()
 
     article_results = []

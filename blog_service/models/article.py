@@ -24,6 +24,7 @@ class CRUDArticle(ArticleBase):
     author_id: Optional[ObjectIdStr]
     like_count: int
 
+
 class ArticleResponse(DBModelMixin):
     article: Article
 
