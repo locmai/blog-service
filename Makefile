@@ -9,3 +9,6 @@ test:
 
 docker:
 	DOCKER_BUILDKIT=1 @docker build .
+
+deploy:
+	az webapp update --name={app_name}
