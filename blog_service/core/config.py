@@ -3,8 +3,6 @@ import sys
 from typing import List
 
 import pkg_resources
-import toml
-from importlib_metadata import version
 from loguru import logger
 from starlette.config import Config
 from starlette.datastructures import CommaSeparatedStrings, Secret

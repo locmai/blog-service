@@ -7,8 +7,8 @@ start-dev:
 test:
 	@poetry run pytest
 
-docker:
-	DOCKER_BUILDKIT=1 @docker build .
+build:
+	DOCKER_BUILDKIT=1 docker build -t locmai/blog-service:${TAG} .
 
 deploy:
 	az webapp update --name={app_name}
