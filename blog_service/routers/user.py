@@ -1,17 +1,22 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-import jwt
-from blog_service.core.database import get_repository
-from loguru import logger
-from blog_service.models.user import User
-from blog_service.models.token import Token
-from fastapi.encoders import jsonable_encoder
-from blog_service.models.query import QueryModel
-from blog_service.services.user import UserService
-from blog_service.core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
 import json
-from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-
 from datetime import datetime, timedelta
+
+import jwt
+from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.encoders import jsonable_encoder
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from loguru import logger
+
+from blog_service.core.config import (ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM,
+                                      SECRET_KEY)
+from blog_service.core.database import get_repository
+from blog_service.models.query import QueryModel
+from blog_service.models.token import Token
+from blog_service.models.user import User
+from blog_service.services.user import UserService
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/users/token")
+
 router = APIRouter()
 
 
@@ -23,6 +28,11 @@ async def get_user_by_username(username: str, user_svc: UserService = Depends(Us
 @router.get('/id/{user_id}', response_model=User)
 async def get_user_by_id(user_id: str, user_svc: UserService = Depends(UserService)):
     return await user_svc.get_user_by_id(user_id)
+
+
+@router.get("/me/", response_model=User)
+async def get_current_logged_in_user(user_svc: UserService = Depends(UserService), token: str = Depends(oauth2_scheme)):
+    return await user_svc.get_current_user(token)
 
 
 @router.post("/token")

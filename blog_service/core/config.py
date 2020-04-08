@@ -24,7 +24,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 1 day
 
 # JWT authentication
 JWT_TOKEN_TYPE: str = "Bearer"
-SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
+SECRET_KEY: str = config("SECRET_KEY", cast=str)
 ACCESS_TOKEN_EXPIRE_MINUTES: config("ACCESS_TOKEN_EXPIRE_MINUTES", cast=int, default=30)
 ALGORITHM = "HS256"
 

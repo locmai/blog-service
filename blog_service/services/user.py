@@ -3,8 +3,9 @@ from datetime import datetime, timedelta
 import jwt
 from bson.objectid import ObjectId
 from fastapi import Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from jwt import PyJWTError
+from loguru import logger
 from passlib.context import CryptContext
 
 from blog_service.core.config import (ACCESS_TOKEN_EXPIRE_MINUTES, ALGORITHM,
@@ -22,8 +23,6 @@ class UserService(BaseService, HealthService):
         super().__init__(repo)
 
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-    oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
     def verify_password(self, plain_password, hashed_password):
         return self.pwd_context.verify(plain_password, hashed_password)
@@ -56,10 +55,10 @@ class UserService(BaseService, HealthService):
         else:
             expire = datetime.utcnow() + timedelta(minutes=15)
         to_encode.update({"exp": expire})
-        encoded_jwt = jwt.encode(to_encode, str(SECRET_KEY), ALGORITHM)
+        encoded_jwt = jwt.encode(to_encode, SECRET_KEY, ALGORITHM)
         return encoded_jwt
 
-    async def get_current_user(self, token: str = Depends(oauth2_scheme)):
+    async def get_current_user(self, token: str):
         credentials_exception = HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
@@ -68,6 +67,7 @@ class UserService(BaseService, HealthService):
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
             username: str = payload.get("sub")
+            logger.info("Retrieve username {0}", username)
             if username is None:
                 raise credentials_exception
             token_data = TokenData(username=username)
@@ -79,6 +79,6 @@ class UserService(BaseService, HealthService):
         return user
 
     async def get_current_active_user(self, current_user: User = Depends(get_current_user)):
-        if current_user.active:
+        if not current_user.active:
             raise HTTPException(status_code=400, detail="Inactive user")
         return current_user
