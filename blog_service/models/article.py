@@ -26,7 +26,7 @@ class CRUDArticle(ArticleBase):
 
 
 class ArticleResponse(DBModelMixin):
-    article: Article
+    articles: List[Article]
 
 
 class ManyArticleResponse(DBModelMixin):

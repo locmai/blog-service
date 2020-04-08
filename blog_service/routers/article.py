@@ -12,8 +12,8 @@ import json
 
 router = APIRouter()
 
-
-@router.get('/')
+from typing import List
+@router.get('/', response_model=List[Article])
 async def get_articles(article_svc: ArticleService = Depends(ArticleService)):
     articles = await article_svc.get()
 
@@ -21,4 +21,5 @@ async def get_articles(article_svc: ArticleService = Depends(ArticleService)):
     for article in articles:
         article_results.append(Article(**article))
 
+    # TODO: Update response_model to ArticleListResponse later
     return article_results

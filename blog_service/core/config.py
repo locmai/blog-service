@@ -10,7 +10,7 @@ from starlette.datastructures import CommaSeparatedStrings, Secret
 from blog_service.core.logging import InterceptHandler
 
 config = Config(".env")
-    
+
 # Project information
 PROJECT_NAME = "Blog Service"
 
@@ -20,11 +20,13 @@ VERSION = config("VERSION", default="0.0.0")
 
 # API configuration
 API_PREFIX = "/api"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 # 1 day
+ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 1 day
 
 # JWT authentication
 JWT_TOKEN_TYPE: str = "Bearer"
-SECRET: Secret = config("SECRET_KEY", cast=Secret)
+SECRET_KEY: Secret = config("SECRET_KEY", cast=Secret)
+ACCESS_TOKEN_EXPIRE_MINUTES: config("ACCESS_TOKEN_EXPIRE_MINUTES", cast=int, default=30)
+ALGORITHM = "HS256"
 
 # Database connection
 
