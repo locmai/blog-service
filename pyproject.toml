@@ -6,7 +6,7 @@ authors = ["locmai <locmai0201@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-pydantic = "^1.4"
+pydantic = "^1.6"
 fastapi = "^0.53.1"
 dnspython = "^1.16.0"
 motor = "^2.1.0"
